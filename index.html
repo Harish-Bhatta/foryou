@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#05030A" />
+<title>Radhe Radhe · A Sacred Devotion · Harish & Jenisha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-dark: #05030A;
+    --gold: #F5D38A;
+    --gold-bright: #FFE8AD;
+    --gold-dark: #C69D43;
+    --champagne: #FAF0D7;
+    --rose: #F28C9F;
+    --rose-glow: rgba(242, 140, 159, 0.35);
+    --pearl: #F4EBFB;
+    --glass-bg: rgba(13, 8, 24, 0.72);
+    --glass-card: rgba(22, 13, 38, 0.78);
+    --glass-border: rgba(245, 211, 138, 0.35);
+    --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    --font-heading: 'Cinzel', serif;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    background: var(--bg-dark);
+    color: var(--pearl);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Canvas Layers */
+  #cosmicCanvas, #lotusCanvas, #rippleCanvas, #celebrationCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  #cosmicCanvas { z-index: 0; }
+  #lotusCanvas { z-index: 1; }
+  #rippleCanvas { z-index: 2; }
+  #celebrationCanvas { z-index: 40; }
+
+  /* Atmospheric Background Glows */
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 50% 20%, rgba(38, 18, 62, 0.6) 0%, transparent 60%),
+      radial-gradient(circle at 20% 80%, rgba(242, 140, 159, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(245, 211, 138, 0.12) 0%, transparent 50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  #stage { position: relative; z-index: 5; width: 100%; }
+
+  .chapter {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    padding: clamp(28px, 6vw, 70px) clamp(18px, 4vw, 40px);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    animation: chapterIn 0.9s cubic-bezier(.16,1,.3,1) both;
+  }
+  .chapter.active { display: flex; }
+
+  @keyframes chapterIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); filter: blur(6px); }
+    to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+
+  /* Next-Level Glass Card */
+  .glass {
+    background: var(--glass-card);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  }
+
+  h1, h2, h3, .heading { font-family: var(--font-heading); font-weight: 700; letter-spacing: 1px; }
+  
+  .gold-text {
+    background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 60%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 35px rgba(245, 211, 138, 0.4);
+  }
+
+  .sacred-mantra {
+    font-family: var(--font-serif);
+    letter-spacing: 7px;
+    font-size: clamp(14px, 3.2vw, 18px);
+    color: var(--gold);
+    text-transform: uppercase;
+    text-shadow: 0 0 16px rgba(245, 211, 138, 0.5);
+  }
+
+  .eyebrow {
+    letter-spacing: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px var(--rose-glow);
+  }
+
+  p.body {
+    line-height: 1.85;
+    font-weight: 300;
+    color: rgba(244, 235, 251, 0.92);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    font-size: clamp(15px, 3.5vw, 17px);
+  }
+
+  /* Enhanced Button */
+  .btn {
+    position: relative;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    color: var(--bg-dark);
+    background: linear-gradient(135deg, var(--champagne), var(--gold), var(--gold-dark));
+    border: none;
+    padding: 18px 42px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 0 0 1px rgba(245,211,138,0.5), 0 14px 40px rgba(245,211,138,0.35);
+    transition: all .3s cubic-bezier(.16,1,.3,1);
+    overflow: hidden;
+  }
+  .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 0 1px rgba(245,211,138,0.8), 0 20px 50px rgba(245,211,138,0.5); }
+  .btn:active { transform: translateY(0) scale(0.97); }
+
+  .btn-ghost {
+    background: rgba(13, 8, 24, 0.6);
+    color: var(--gold);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  }
+  .btn-ghost:hover { background: rgba(245,211,138,0.12); }
+
+  /* Audio Equalizer Top Bar */
+  #audioWidget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(13, 8, 24, 0.85);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  #audioWidget .bars { display: flex; align-items: flex-end; gap: 3px; height: 18px; }
+  #audioWidget .bars span {
+    width: 3px; background: var(--gold); border-radius: 2px;
+    animation: eq 0.8s ease-in-out infinite;
+  }
+  #audioWidget.muted .bars span { animation-play-state: paused; height: 4px !important; opacity: 0.4; }
+  #audioWidget .bars span:nth-child(1){ height: 8px; animation-delay: 0s; }
+  #audioWidget .bars span:nth-child(2){ height: 16px; animation-delay: .15s; }
+  #audioWidget .bars span:nth-child(3){ height: 11px; animation-delay: .3s; }
+  #audioWidget .bars span:nth-child(4){ height: 18px; animation-delay: .1s; }
+  @keyframes eq { 0%,100%{ transform: scaleY(0.4);} 50%{ transform: scaleY(1);} }
+  #audioWidget .label { font-size: 11px; letter-spacing: 1.5px; color: var(--pearl); font-weight: 500; text-transform: uppercase; }
+
+  /* Progress Rail */
+  #progressRail {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rose), var(--gold), var(--champagne));
+    z-index: 60;
+    transition: width .8s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 0 16px rgba(245,211,138,0.8);
+  }
+
+  /* Landing Page Decor Enhancements */
+  .landing-hero-card {
+    position: relative;
+    padding: 40px 28px;
+    width: min(680px, 92vw);
+    background: radial-gradient(circle at 50% 0%, rgba(242, 140, 159, 0.15), rgba(13, 8, 24, 0.85) 70%);
+    border: 1px solid var(--glass-border);
+    border-radius: 36px;
+    box-shadow: 0 0 50px rgba(245, 211, 138, 0.15), inset 0 0 30px rgba(242, 140, 159, 0.1);
+  }
+
+  .title-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0 20px;
+  }
+  
+  .title-wrapper::before, .title-wrapper::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 16px;
+    text-shadow: 0 0 10px var(--gold-bright);
+    animation: pulseSparkle 2s ease-in-out infinite alternate;
+  }
+  .title-wrapper::before { left: -28px; }
+  .title-wrapper::after { right: -28px; }
+
+  @keyframes pulseSparkle {
+    0% { opacity: 0.4; transform: translateY(-50%) scale(0.8); }
+    100% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+  }
+
+  .lotus-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .lotus-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    border-radius: 50%;
+    border: 1px dashed rgba(245, 211, 138, 0.4);
+    animation: spinSlow 20s linear infinite;
+  }
+
+  .lotus-wrap::after {
+    content: "";
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    border: 1px solid rgba(242, 140, 159, 0.2);
+    animation: spinSlow 35s linear infinite reverse;
+  }
+
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Chapter 1 */
+  .lotus-icon {
+    width: clamp(110px, 24vw, 160px);
+    height: clamp(110px, 24vw, 160px);
+    filter: drop-shadow(0 0 35px rgba(245,211,138,0.7));
+    animation: breathe 4s ease-in-out infinite;
+  }
+  @keyframes breathe { 0%,100%{ transform: scale(1); filter: drop-shadow(0 0 25px rgba(245,211,138,0.5));} 50%{ transform: scale(1.08); filter: drop-shadow(0 0 45px rgba(245,211,138,0.85));} }
+
+  #typewriter {
+    max-width: 680px;
+    margin: 20px auto;
+    font-family: var(--font-serif);
+    font-size: clamp(20px, 4.8vw, 30px);
+    line-height: 1.7;
+    min-height: 140px;
+    color: var(--champagne);
+    font-style: italic;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+  }
+  .cursor { display:inline-block; width: 2px; background: var(--gold); margin-left: 3px; animation: blink 0.9s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Chapter 2 - Cards */
+  .cards-3d {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 36px;
+    perspective: 1600px;
+  }
+  .flip-card {
+    width: min(300px, 86vw);
+    height: 390px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(.2,.8,.2,1);
+    cursor: pointer;
+    position: relative;
+  }
+  .flip-card.flipped { transform: rotateY(180deg); }
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 28px;
+    padding: 32px 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+  }
+  .flip-back { transform: rotateY(180deg); justify-content: flex-start; padding-top: 40px; }
+  .flip-card .num { position: absolute; top: 20px; left: 24px; font-family: var(--font-heading); font-size: 26px; color: rgba(245,211,138,0.4); }
+  .flip-icon { width: 76px; height: 76px; filter: drop-shadow(0 0 22px rgba(245,211,138,0.6)); }
+  .flip-title { font-family: var(--font-heading); font-size: 20px; color: var(--gold); }
+  .flip-hint { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,235,251,0.6); }
+  .flip-back h3 { font-family: var(--font-serif); font-size: 24px; color: var(--rose); margin-bottom: 8px; }
+  .flip-back p { font-size: 15px; line-height: 1.75; color: rgba(244,235,251,0.92); font-weight: 300; }
+
+  /* Chapter 3 - Pills */
+  .pills { width: min(660px, 92vw); margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .pill { overflow: hidden; cursor: pointer; }
+  .pill-head { display: flex; align-items: center; gap: 16px; padding: 22px 26px; }
+  .pill-head .p-icon { width: 28px; height: 28px; flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(245,211,138,0.6)); }
+  .pill-head .p-title { font-family: var(--font-serif); font-size: 22px; color: var(--champagne); flex: 1; text-align: left; }
+  .pill-head .chev { color: var(--gold); transition: transform .4s ease; font-size: 18px; }
+  .pill.open .chev { transform: rotate(180deg); }
+  .pill-body { max-height: 0; transition: max-height .55s cubic-bezier(.16,1,.3,1); }
+  .pill.open .pill-body { max-height: 300px; }
+  .pill-body p { padding: 0 26px 24px; text-align: left; line-height: 1.85; font-weight: 300; color: rgba(244,235,251,0.92); font-size: 15px; }
+
+  .waveform-wrap {
+    margin: 26px auto 0;
+    width: min(660px, 92vw);
+    padding: 24px 28px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    transition: all 0.4s ease;
+  }
+  .waveform-wrap.active {
+    border-color: rgba(245, 211, 138, 0.7);
+    box-shadow: 0 0 35px rgba(245, 211, 138, 0.3);
+  }
+  .wave-header { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .wave-header-title { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--rose); font-weight: 600; }
+  .wave-status-icon {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--gold);
+    opacity: 0.4; transition: all 0.3s ease;
+  }
+  .waveform-wrap.active .wave-status-icon { opacity: 1; box-shadow: 0 0 12px var(--gold); }
+  #waveform { width: 100%; height: 50px; display: block; }
+  .wave-quote {
+    font-family: var(--font-serif); font-style: italic; font-size: clamp(17px, 4vw, 22px);
+    color: var(--gold); min-height: 30px; display: flex; align-items: center; justify-content: center;
+    opacity: 0.8; transition: opacity 0.5s ease;
+  }
+  .waveform-wrap.active .wave-quote { opacity: 1; }
+  .wave-subtext { font-size: 11px; letter-spacing: 1.5px; color: rgba(244,235,251,0.6); text-transform: uppercase; }
+
+  /* Chapter 4 - Enhanced Petal Game */
+  #petalStage {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    height: 380px;
+    margin: 24px auto;
+    overflow: hidden;
+    border-radius: 28px;
+    background: rgba(13, 8, 24, 0.65);
+    border: 1px dashed rgba(245, 211, 138, 0.3);
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+  }
+  .game-petal {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+    filter: drop-shadow(0 0 18px rgba(245,211,138,0.8));
+    transition: transform .15s ease;
+    z-index: 6;
+    user-select: none;
+  }
+  .game-petal:active { transform: scale(0.8); }
+
+  .lotus-meter-wrap { width: min(440px, 90vw); margin: 12px auto 0; }
+  .lotus-meter-track { height: 18px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; border: 1px solid var(--glass-border); }
+  .lotus-meter-fill { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--rose), var(--gold)); transition: width .5s cubic-bezier(.16,1,.3,1); box-shadow: 0 0 20px rgba(245,211,138,0.8); }
+  .meter-label { margin-top: 14px; font-size: 13px; letter-spacing: 1.5px; color: var(--champagne); font-weight: 500; }
+  
+  .compliment-pop {
+    position: absolute;
+    font-family: var(--font-serif);
+    font-size: clamp(18px, 4vw, 24px);
+    color: var(--gold-bright);
+    pointer-events: none;
+    animation: floatUp 1.6s ease-out forwards;
+    white-space: nowrap;
+    z-index: 20;
+    text-shadow: 0 0 20px rgba(0,0,0,0.9), 0 0 10px rgba(245,211,138,0.8);
+    background: rgba(13, 8, 24, 0.85);
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+  }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translate(-50%, 0) scale(0.7); }
+    20% { opacity: 1; transform: translate(-50%, -20px) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -90px) scale(1.05); }
+  }
+
+  /* Chapter 5 - Seal */
+  .letter-shell { width: min(540px, 92vw); padding: 44px 30px; position: relative; }
+  .wax-seal {
+    width: 140px; height: 140px; margin: 26px auto; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff6b7d, #b0122b 60%, #680716);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading); font-size: 28px; color: #ffe6c9; cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(245,211,138,0.4), inset 0 6px 20px rgba(0,0,0,0.6), 0 16px 35px rgba(176,18,43,0.6);
+    position: relative; user-select: none; transition: transform .2s ease;
+    text-shadow: 0 0 12px rgba(0,0,0,0.8);
+  }
+  .wax-seal:active { transform: scale(0.95); }
+  .seal-ring { position: absolute; inset: -12px; border-radius: 50%; border: 2px solid var(--gold); opacity: 0.4; }
+  .seal-progress { position: absolute; inset: -12px; border-radius: 50%; }
+  .hold-hint { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--rose); margin-top: 14px; font-weight: 600; }
+
+  /* Chapter 6 & Sunset Sky */
+  #ch6 { background: transparent; }
+  .sky-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background: linear-gradient(180deg, #1f0c29 0%, #3d1b32 40%, #733f32 78%, #c48249 100%);
+    opacity: 0; transition: opacity 1.8s ease; pointer-events: none;
+  }
+  .sky-bg.show { opacity: 0.65; }
+
+  .love-letter { width: min(600px, 92vw); padding: 40px 32px; text-align: center; margin: 20px auto; }
+  .love-letter p { margin-bottom: 16px; line-height: 1.85; font-weight: 300; font-size: 16.5px; color: rgba(244,235,251,0.95); }
+  .love-letter .sign { font-family: var(--font-serif); font-style: italic; font-size: 24px; color: var(--gold); margin-top: 12px; }
+  
+  .proposal-q {
+    font-family: var(--font-heading);
+    font-size: clamp(26px, 5.5vw, 42px);
+    line-height: 1.35;
+    margin: 28px auto;
+    max-width: 720px;
+  }
+
+  .choice-row { display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 24px; position: relative; min-height: 70px; }
+  #btnThink { position: relative; transition: all .35s cubic-bezier(.34,1.56,.64,1); z-index: 20; }
+
+  /* Chapter 7 - Grand Celebration Page */
+  .celebrate-banner {
+    font-family: var(--font-heading);
+    font-size: clamp(30px, 7vw, 56px);
+    line-height: 1.25;
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+  }
+
+  .keepsake {
+    width: min(520px, 92vw);
+    padding: 48px 34px;
+    margin-top: 10px;
+    border: 2px solid var(--gold);
+    background: rgba(18, 10, 32, 0.88);
+    box-shadow: 0 0 50px rgba(245, 211, 138, 0.3), inset 0 0 25px rgba(245, 211, 138, 0.15);
+    position: relative;
+  }
+  .keepsake::before {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px stroke var(--glass-border);
+    pointer-events: none;
+  }
+  .keepsake .names { font-family: var(--font-heading); font-size: clamp(34px, 7vw, 50px); margin: 16px 0; letter-spacing: 2px; }
+  .infinity-lotus { width: 100px; height: 100px; margin: 0 auto 12px; filter: drop-shadow(0 0 25px rgba(245,211,138,0.8)); animation: breathe 4s ease-in-out infinite; }
+
+  .mt-lg { margin-top: 36px; }
+  .maxw { max-width: 720px; }
+  .fade-slow { animation: fadeUp 1.4s ease both; }
+  @keyframes fadeUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+  .divider { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 22px auto; }
+</style>
+</head>
+<body>
+
+<!-- Audio Elements -->
+<audio id="bgMusic" src="radhakrishnaflute.mp3" loop preload="auto"></audio>
+<audio id="winMusic" src="win.mp3" preload="auto"></audio>
+
+<div class="bg-glow"></div>
+<canvas id="cosmicCanvas"></canvas>
+<canvas id="lotusCanvas"></canvas>
+<canvas id="rippleCanvas"></canvas>
+<canvas id="celebrationCanvas"></canvas>
+
+<div class="sky-bg" id="skyBg"></div>
+<div id="progressRail"></div>
+
+<div id="audioWidget" class="muted" title="Toggle Soundscape">
+  <div class="bars"><span></span><span></span><span></span><span></span></div>
+  <div class="label" id="audioLabel">Sound Off</div>
+</div>
+
+<main id="stage">
+
+  <!-- CHAPTER 1: DECORATED LANDING PAGE -->
+  <section class="chapter active" id="ch1">
+    <div class="landing-hero-card fade-slow">
+      <div class="sacred-mantra">• Radhe Radhe •</div>
+      <div class="title-wrapper">
+        <h2 class="gold-text" style="font-size: clamp(22px, 5vw, 36px); font-family: var(--font-heading);">A Sacred Devotion</h2>
+      </div>
+      <div class="lotus-wrap">
+        <svg class="lotus-icon" viewBox="0 0 100 100" id="lotusMain"></svg>
+      </div>
+      <div id="typewriter"><span class="cursor" style="height:1em;"></span></div>
+      <button class="btn mt-lg" id="enterBtn" style="opacity:0; pointer-events:none;">Enter Our Sacred Space</button>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2 -->
+  <section class="chapter" id="ch2">
+    <div class="eyebrow">Chapter II</div>
+    <h1 class="gold-text" style="font-size: clamp(28px,6.5vw,48px);">The Vault of Sacred Memories</h1>
+    <p class="body maxw" style="margin-top:14px;">Tap each memory to turn it over. Some things were felt long before they were ever spoken.</p>
+    <div class="cards-3d" id="cardsRow"></div>
+    <button class="btn mt-lg" id="toCh3">Continue the Journey</button>
+  </section>
+
+  <!-- CHAPTER 3 -->
+  <section class="chapter" id="ch3">
+    <div class="eyebrow">Chapter III</div>
+    <h1 class="gold-text" style="font-size: clamp(28px,6.5vw,48px);">The Unspoken Vows</h1>
+    <p class="body maxw" style="margin-top:14px;">Three quiet promises, held in silence, offered now in light.</p>
+    <div class="pills" id="pillsWrap"></div>
+
+    <div class="waveform-wrap glass" id="waveWrap">
+      <div class="wave-header">
+        <span class="wave-status-icon"></span>
+        <span class="wave-header-title">The Melody of Silence</span>
+      </div>
+      <canvas id="waveform"></canvas>
+      <div class="wave-quote" id="waveQuote">"If silence could speak, it would whisper your name."</div>
+      <div class="wave-subtext" id="waveSubtext">Tap box to harmonize</div>
+    </div>
+
+    <button class="btn mt-lg" id="toCh4">Continue the Journey</button>
+  </section>
+
+  <!-- CHAPTER 4 -->
+  <section class="chapter" id="ch4">
+    <div class="eyebrow">Chapter IV</div>
+    <h1 class="gold-text" style="font-size: clamp(28px,6.5vw,48px);">The 108 Petals of Devotion</h1>
+    <p class="body maxw" style="margin-top:14px;">Catch the falling lotus petals. Each one holds a reason my heart is devoted to you.</p>
+    <div id="petalStage"></div>
+    <div class="lotus-meter-wrap">
+      <div class="lotus-meter-track"><div class="lotus-meter-fill" id="meterFill"></div></div>
+      <div class="meter-label" id="meterLabel">Lotus of Devotion · 0%</div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 5 -->
+  <section class="chapter" id="ch5">
+    <div class="eyebrow">Chapter V</div>
+    <h1 class="gold-text" style="font-size: clamp(28px,6.5vw,48px);">The Secret Seal</h1>
+    <div class="letter-shell glass">
+      <p class="body">A letter has waited a long time to be opened.<br>Press and hold the seal to break it — and to hear a heart quicken.</p>
+      <div class="wax-seal" id="waxSeal">
+        <div class="seal-ring"></div>
+        <svg class="seal-progress" id="sealProgress" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="59" fill="none" stroke="#F5D38A" stroke-width="4"
+            stroke-linecap="round" stroke-dasharray="370.7" stroke-dashoffset="370.7"
+            transform="rotate(-90 65 65)" id="sealArc"/>
+        </svg>
+        J &amp; H
+      </div>
+      <div class="hold-hint" id="holdHint">Hold the seal · 5 seconds</div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 6 -->
+  <section class="chapter" id="ch6">
+    <div class="eyebrow">Chapter VI</div>
+    <h1 class="gold-text" style="font-size: clamp(26px,6vw,44px);">The Unwritten Forever</h1>
+    <div class="love-letter glass" id="loveLetter"></div>
+    <h2 class="gold-text proposal-q" id="proposalQ"></h2>
+    <div class="choice-row">
+      <button class="btn" id="btnYes">YES, FOREVER!</button>
+      <button class="btn btn-ghost" id="btnThink">Let Me Think</button>
+    </div>
+  </section>
+
+  <!-- CHAPTER 7: CELEBRATION -->
+  <section class="chapter" id="ch7">
+    <div class="celebrate-banner gold-text" id="celebrateBanner"></div>
+    <div class="keepsake glass">
+      <svg class="infinity-lotus" viewBox="0 0 120 60" id="infinityLotus"></svg>
+      <div class="sacred-mantra">Our Eternal Union</div>
+      <div class="names gold-text" id="keepsakeNames"></div>
+      <div class="divider"></div>
+      <p class="body" style="font-size:16px; font-style:italic;">
+        "Under the divine light of Radha Krishna,<br>two souls, bound by sacred quietness,<br>begin their journey of forever."
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const DEVOTION_CONFIG = {
+  partnerName: "Jenisha",
+  nickname: "Jeney",
+  yourName: "Harish",
+  motto: "Radhe Radhe",
+  webhookUrl: "https://formspree.io/f/xyegajnv",
+  proposalText: "Jenisha, will you give me the honor of loving you forever?"
+};
+
+const State = {
+  current: 1,
+  totalChapters: 7,
+  muted: true,
+  waveHarmonizing: false,
+  accepted: false
+};
+
+// SVG Assets
+function lotusSVG() {
+  return `
+    <g fill="none" stroke="#F5D38A" stroke-width="2" stroke-linejoin="round">
+      <path d="M50 78 C30 70 18 52 22 34 C34 42 44 56 50 74 Z" fill="rgba(242,140,159,0.3)"/>
+      <path d="M50 78 C70 70 82 52 78 34 C66 42 56 56 50 74 Z" fill="rgba(242,140,159,0.3)"/>
+      <path d="M50 80 C36 74 26 60 26 44 C38 50 46 62 50 78 Z" fill="rgba(245,211,138,0.35)"/>
+      <path d="M50 80 C64 74 74 60 74 44 C62 50 54 62 50 78 Z" fill="rgba(245,211,138,0.35)"/>
+      <path d="M50 82 C46 66 46 48 50 30 C54 48 54 66 50 82 Z" fill="rgba(250,240,215,0.5)"/>
+      <path d="M20 78 Q50 88 80 78" stroke="rgba(245,211,138,0.7)"/>
+    </g>`;
+}
+function sunEyeSVG() {
+  return `
+    <g fill="none" stroke="#F5D38A" stroke-width="2" stroke-linecap="round">
+      <circle cx="50" cy="50" r="14" fill="rgba(250,240,215,0.3)"/>
+      <circle cx="50" cy="50" r="5" fill="#F5D38A"/>
+      ${Array.from({length:12}).map((_,i)=>{
+        const a=(i/12)*Math.PI*2, x1=50+Math.cos(a)*22, y1=50+Math.sin(a)*22, x2=50+Math.cos(a)*32, y2=50+Math.sin(a)*32;
+        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
+      }).join('')}
+    </g>`;
+}
+function featherSVG() {
+  return `
+    <g fill="none" stroke="#F5D38A" stroke-width="2" stroke-linecap="round">
+      <path d="M35 82 C40 55 55 30 72 20 C74 42 66 66 44 78" fill="rgba(242,140,159,0.25)"/>
+      <path d="M50 62 L44 78" />
+      ${Array.from({length:6}).map((_,i)=>{
+        const y=30+i*8; return `<path d="M${52-i*2} ${y} q10 -4 16 -10" stroke="rgba(245,211,138,0.8)"/>`;
+      }).join('')}
+    </g>`;
+}
+function shieldSVG(){return `<g fill="none" stroke="#F5D38A" stroke-width="2" stroke-linejoin="round"><path d="M12 2 L22 6 V13 C22 19 17 22 12 23 C7 22 2 19 2 13 Z" fill="rgba(242,140,159,0.25)"/><path d="M8 12 l3 3 l5 -6"/></g>`;}
+function heartSVG(){return `<g fill="none" stroke="#F5D38A" stroke-width="2"><path d="M12 21 C4 15 2 9 6 5 C9 2 12 5 12 7 C12 5 15 2 18 5 C22 9 20 15 12 21 Z" fill="rgba(242,140,159,0.3)"/></g>`;}
+function featherSmallSVG(){return `<g fill="none" stroke="#F5D38A" stroke-width="1.6" stroke-linecap="round"><path d="M8 20 C10 13 14 7 18 5 C18.6 11 15 17 10.5 18.6" fill="rgba(242,140,159,0.2)"/><path d="M12 15 L10.5 19"/><path d="M12 8 q3 -1 5 -3"/><path d="M11 11 q3 -1 5 -3"/><path d="M10 14 q3 -1 5 -3"/></g>`;}
+
+document.getElementById('lotusMain').innerHTML = lotusSVG();
+document.getElementById('infinityLotus').innerHTML = `
+  <g fill="none" stroke="#F5D38A" stroke-width="2.5" stroke-linecap="round">
+    <path d="M60 30 C50 12 20 12 20 30 C20 48 50 48 60 30 C70 12 100 12 100 30 C100 48 70 48 60 30 Z" fill="rgba(242,140,159,0.25)"/>
+    <circle cx="60" cy="30" r="4" fill="#F5D38A"/>
+  </g>`;
+
+// --- AUDIO CONTROLLER WITH UPDATED VOLUMES ---
+const AudioEngine = (() => {
+  let ctx = null, sfxBus = null;
+  const bgMusic = document.getElementById('bgMusic');
+  const winMusic = document.getElementById('winMusic');
+
+  function init() {
+    if (ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    ctx = new AC();
+    sfxBus = ctx.createGain();
+    sfxBus.gain.value = 0.55;
+    sfxBus.connect(ctx.destination);
+  }
+
+  function startAmbient() {
+    if (!bgMusic || State.muted || State.accepted) return;
+    bgMusic.volume = 0.40; // Background music set to 40%
+    bgMusic.play().catch(() => {});
+  }
+
+  function pauseAmbient() {
+    if (bgMusic) bgMusic.pause();
+  }
+
+  function resumeAmbient() {
+    if (!bgMusic || State.muted || State.accepted) return;
+    bgMusic.volume = 0.40; // Ensure 40% volume on resume
+    bgMusic.play().catch(() => {});
+  }
+
+  function playWinMusic() {
+    if (bgMusic) {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+    }
+    if (winMusic && !State.muted) {
+      winMusic.volume = 0.60; // win.mp3 set to 60%
+      winMusic.play().catch(() => {});
+    }
+  }
+
+  // Sacred Temple Bell Chime Effect on Tap
+  function chime() {
+    if (!ctx || State.muted) return;
+    const now = ctx.currentTime;
+    const freqs = [432, 864, 1296];
+    freqs.forEach((freq, index) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = index === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+
+      const vol = index === 0 ? 0.22 : 0.08 / index;
+      g.gain.setValueAtTime(0.001, now);
+      g.gain.linearRampToValueAtTime(vol, now + 0.04);
+      g.gain.exponentialRampToValueAtTime(0.0001, now + (1.2 + index * 0.3));
+
+      osc.connect(g);
+      g.connect(sfxBus);
+      osc.start(now);
+      osc.stop(now + 1.8);
+    });
+  }
+
+  function heartbeatPulse(bpm) {
+    if (!ctx || State.muted) return;
+    const now = ctx.currentTime;
+    [0, 0.15].forEach((offset, idx) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = idx === 0 ? 55 : 45;
+      const t = now + offset;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(idx === 0 ? 0.25 : 0.15, t + 0.04);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+      osc.connect(g);
+      g.connect(sfxBus);
+      osc.start(t);
+      osc.stop(t + 0.3);
+    });
+  }
+
+  let hbActive = false, heartbeatTimer = null;
+  function startHeartbeat(getBpm) {
+    if (hbActive) return;
+    hbActive = true;
+    function tick() {
+      if (!hbActive) return;
+      heartbeatPulse(getBpm());
+      heartbeatTimer = setTimeout(tick, (60 / getBpm()) * 1000);
+    }
+    tick();
+  }
+  function stopHeartbeat() { hbActive = false; if (heartbeatTimer) clearTimeout(heartbeatTimer); }
+
+  function resume() { if (ctx && ctx.state === 'suspended') ctx.resume(); }
+
+  return { init, startAmbient, pauseAmbient, resumeAmbient, playWinMusic, chime, startHeartbeat, stopHeartbeat, resume };
+})();
+
+const audioWidget = document.getElementById('audioWidget');
+const audioLabel = document.getElementById('audioLabel');
+
+function setMuted(m) {
+  State.muted = m;
+  audioWidget.classList.toggle('muted', m);
+  audioLabel.textContent = m ? 'Sound Off' : 'Sound On';
+  if (m) {
+    AudioEngine.pauseAmbient();
+  } else {
+    if (State.accepted) {
+      AudioEngine.playWinMusic();
+    } else {
+      AudioEngine.resumeAmbient();
+    }
+  }
+}
+audioWidget.addEventListener('click', () => {
+  AudioEngine.init();
+  AudioEngine.resume();
+  setMuted(!State.muted);
+});
+
+function goToChapter(n) {
+  const cur = document.getElementById('ch' + State.current);
+  const next = document.getElementById('ch' + n);
+  if (cur) cur.classList.remove('active');
+  if (next) next.classList.add('active');
+  State.current = n;
+  document.getElementById('progressRail').style.width = ((n / State.totalChapters) * 100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  AudioEngine.chime();
+  if (n === 5) startHeartbeatWatcher();
+  if (n === 6) revealSky();
+}
+document.getElementById('progressRail').style.width = (1 / State.totalChapters * 100) + '%';
+
+// --- CANVAS BACKGROUND ANIMATIONS ---
+const cosmicCanvas = document.getElementById('cosmicCanvas');
+const cctx = cosmicCanvas.getContext('2d');
+let stars = [];
+
+function sizeCanvas(cv) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = window.innerWidth * dpr;
+  cv.height = window.innerHeight * dpr;
+  cv.style.width = window.innerWidth + 'px';
+  cv.style.height = window.innerHeight + 'px';
+  return dpr;
+}
+
+function initStars() {
+  const dpr = sizeCanvas(cosmicCanvas);
+  cctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const count = Math.floor((window.innerWidth * window.innerHeight) / 5500);
+  stars = [];
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: 0.6 + Math.random() * 1.6,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.4 + Math.random() * 1.2,
+      hue: Math.random() > 0.75 ? '242,140,159' : '245,211,138'
+    });
+  }
+}
+
+const lotusCanvas = document.getElementById('lotusCanvas');
+const lctx = lotusCanvas.getContext('2d');
+let lotuses = [];
+
+function initLotuses() {
+  const dpr = sizeCanvas(lotusCanvas);
+  lctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  lotuses = [];
+  for (let i = 0; i < 18; i++) {
+    lotuses.push(spawnCenteredLotus());
+  }
+}
+
+function spawnCenteredLotus() {
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  const spreadX = window.innerWidth * 0.45;
+  const spreadY = window.innerHeight * 0.45;
+
+  return {
+    x: cx + (Math.random() - 0.5) * spreadX * 2,
+    y: cy + (Math.random() - 0.5) * spreadY * 2,
+    baseX: cx + (Math.random() - 0.5) * spreadX * 1.8,
+    baseY: cy + (Math.random() - 0.5) * spreadY * 1.8,
+    size: 16 + Math.random() * 24,
+    swayAmp: 20 + Math.random() * 35,
+    swayFreq: 0.3 + Math.random() * 0.6,
+    phase: Math.random() * Math.PI * 2,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.008,
+    opacity: 0.35 + Math.random() * 0.45
+  };
+}
+
+function drawLotusPetal(ctx, l, t) {
+  ctx.save();
+  const swayX = Math.sin(t * l.swayFreq + l.phase) * l.swayAmp;
+  const swayY = Math.cos(t * l.swayFreq * 0.8 + l.phase) * (l.swayAmp * 0.6);
+  ctx.translate(l.baseX + swayX, l.baseY + swayY);
+  ctx.rotate(l.rot);
+  ctx.globalAlpha = l.opacity;
+  const s = l.size;
+  const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, s);
+  grad.addColorStop(0, 'rgba(250,240,215,0.95)');
+  grad.addColorStop(1, 'rgba(245,211,138,0)');
+  for (let i = 0; i < 6; i++) {
+    ctx.save();
+    ctx.rotate((i / 6) * Math.PI * 2);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.quadraticCurveTo(s * 0.4, -s * 0.7, 0, -s * 1.2);
+    ctx.quadraticCurveTo(-s * 0.4, -s * 0.7, 0, 0);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.restore();
+  }
+  ctx.beginPath();
+  ctx.arc(0, 0, s * 0.28, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(242,140,159,0.85)';
+  ctx.fill();
+  ctx.restore();
+}
+
+const rippleCanvas = document.getElementById('rippleCanvas');
+const rctx = rippleCanvas.getContext('2d');
+let ripples = [];
+
+function sizeRipple() {
+  const dpr = sizeCanvas(rippleCanvas);
+  rctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function addRipple(x, y) {
+  ripples.push({ x, y, r: 4, max: 80 + Math.random() * 50, alpha: 0.85 });
+}
+window.addEventListener('pointerdown', (e) => { addRipple(e.clientX, e.clientY); });
+
+let startTime = performance.now();
+function animate(now) {
+  const t = (now - startTime) / 1000;
+  const w = window.innerWidth, h = window.innerHeight;
+
+  cctx.clearRect(0, 0, w, h);
+  for (const s of stars) {
+    const op = 0.3 + 0.5 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+    cctx.beginPath();
+    cctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    cctx.fillStyle = 'rgba(' + s.hue + ',' + op.toFixed(3) + ')';
+    cctx.shadowBlur = 6;
+    cctx.shadowColor = 'rgba(' + s.hue + ',0.6)';
+    cctx.fill();
+  }
+  cctx.shadowBlur = 0;
+
+  lctx.clearRect(0, 0, w, h);
+  for (const l of lotuses) {
+    l.rot += l.rotSpeed;
+    drawLotusPetal(lctx, l, t);
+  }
+
+  rctx.clearRect(0, 0, w, h);
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const rp = ripples[i];
+    rp.r += 3.0;
+    rp.alpha *= 0.95;
+    if (rp.alpha < 0.02 || rp.r > rp.max) { ripples.splice(i, 1); continue; }
+    rctx.beginPath();
+    rctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+    rctx.strokeStyle = 'rgba(245,211,138,' + rp.alpha.toFixed(3) + ')';
+    rctx.lineWidth = 2;
+    rctx.shadowBlur = 10;
+    rctx.shadowColor = 'rgba(245,211,138,0.6)';
+    rctx.stroke();
+  }
+  rctx.shadowBlur = 0;
+
+  requestAnimationFrame(animate);
+}
+
+function initAllCanvas() {
+  initStars();
+  initLotuses();
+  sizeRipple();
+  sizeCanvas(document.getElementById('celebrationCanvas'));
+}
+window.addEventListener('resize', initAllCanvas);
+
+const typewriterEl = document.getElementById('typewriter');
+const typeLines = [
+  "In a world of infinite noise,",
+  "some bonds are written long before words are ever spoken.",
+  "A quiet devotion born in silence...",
+  "guided by divine light."
+];
+function runTypewriter() {
+  let li = 0, ci = 0, out = '';
+  typewriterEl.innerHTML = '';
+  function step() {
+    if (li >= typeLines.length) {
+      const btn = document.getElementById('enterBtn');
+      btn.style.transition = 'opacity 1.2s ease';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      return;
+    }
+    const line = typeLines[li];
+    if (ci < line.length) {
+      out += line[ci];
+      typewriterEl.innerHTML = out.replace(/\n/g, '<br>') + '<span class="cursor" style="height:1em;"></span>';
+      ci++;
+      setTimeout(step, 34 + Math.random() * 30);
+    } else {
+      out += '<br>';
+      li++; ci = 0;
+      setTimeout(step, 520);
+    }
+  }
+  step();
+}
+setTimeout(runTypewriter, 700);
+
+document.getElementById('enterBtn').addEventListener('click', () => {
+  AudioEngine.init();
+  AudioEngine.resume();
+  setMuted(false);
+  initAllCanvas();
+  requestAnimationFrame(animate);
+  goToChapter(2);
+});
+
+// CHAPTER 2 - CARDS
+const cardData = [
+  {
+    num: '01', icon: lotusSVG(), title: 'The Silent Beginning',
+    backTitle: 'A Devotion Born in Stillness',
+    backText: 'It did not begin with words. It began with a feeling too gentle to name — a quiet affection that grew in the stillness between us, year after year, asking for nothing, simply being. Like a lotus rising through calm water, it bloomed in silence.'
+  },
+  {
+    num: '02', icon: sunEyeSVG(), title: 'The Inspiring Sight',
+    backTitle: 'A Single Glimpse',
+    backText: 'One sight of your presence, and the whole day was complete. You never knew it, but on the heaviest mornings, the thought of you gave me the strength to move forward. You were the quiet sunrise my heart waited for.'
+  },
+  {
+    num: '03', icon: featherSVG(), title: 'Unspoken Reverence',
+    backTitle: 'Loving in Quietness',
+    backText: 'I chose silence not out of fear, but out of respect. To love you quietly was a conscious act of reverence — like a devotee before the divine, unwilling to disturb something sacred with clumsy words.'
+  }
+];
+const cardsRow = document.getElementById('cardsRow');
+cardData.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'flip-card';
+  card.innerHTML = `
+    <div class="flip-face glass flip-front">
+      <span class="num">${c.num}</span>
+      <svg class="flip-icon" viewBox="0 0 100 100">${c.icon}</svg>
+      <div class="flip-title">${c.title}</div>
+      <div class="flip-hint">Tap to reveal</div>
+    </div>
+    <div class="flip-face glass flip-back">
+      <span class="num">${c.num}</span>
+      <h3>${c.backTitle}</h3>
+      <p>${c.backText}</p>
+      <div class="flip-hint" style="margin-top:auto;">Tap to close</div>
+    </div>`;
+  card.addEventListener('click', () => { card.classList.toggle('flipped'); AudioEngine.chime(); });
+  cardsRow.appendChild(card);
+});
+document.getElementById('toCh3').addEventListener('click', () => goToChapter(3));
+
+// CHAPTER 3 - PILLS & HARMONIZATION
+const pillData = [
+  { icon: shieldSVG(), title: 'The Silent Shield',
+    text: 'I made a quiet vow long ago: to protect your dignity as if it were my own breath. Not once, in any room, would I allow a single word against you to pass unanswered. Your honor is a sacred thing I guard in silence.' },
+  { icon: featherSmallSVG(), title: 'The Reverent Respect',
+    text: 'My hesitation to speak your name aloud was never shyness. It came from awe. Some names are prayers, and prayers are spoken softly. To me, saying your name felt like touching something holy.' },
+  { icon: heartSVG(), title: 'The Only Inspiration',
+    text: 'Your smile, your spirit, your gentle presence — they are the single motivation behind everything I strive for. When I lose my way, I remember you exist in this world, and that is enough to begin again.' }
+];
+const pillsWrap = document.getElementById('pillsWrap');
+pillData.forEach(p => {
+  const pill = document.createElement('div');
+  pill.className = 'pill glass';
+  pill.innerHTML = `
+    <div class="pill-head">
+      <svg class="p-icon" viewBox="0 0 24 24">${p.icon}</svg>
+      <div class="p-title">${p.title}</div>
+      <div class="chev">⌄</div>
+    </div>
+    <div class="pill-body"><p>${p.text}</p></div>`;
+  pill.querySelector('.pill-head').addEventListener('click', () => {
+    pill.classList.toggle('open');
+    AudioEngine.chime();
+  });
+  pillsWrap.appendChild(pill);
+});
+
+const waveCanvas = document.getElementById('waveform');
+const wctx = waveCanvas.getContext('2d');
+const waveWrap = document.getElementById('waveWrap');
+const waveSubtext = document.getElementById('waveSubtext');
+let waveActive = false, waveT = 0;
+
+function sizeWave() {
+  const rect = waveCanvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  waveCanvas.width = rect.width * dpr;
+  waveCanvas.height = 50 * dpr;
+  wctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function drawWave() {
+  const w = waveCanvas.getBoundingClientRect().width, h = 50;
+  wctx.clearRect(0, 0, w, h);
+  const bars = 40;
+  const bw = w / bars;
+  for (let i = 0; i < bars; i++) {
+    const base = Math.sin(i * 0.4 + waveT * 2.8) * 0.5 + 0.5;
+    const amp = waveActive ? (0.25 + base * 0.75) : (0.12 + base * 0.15);
+    const bh = amp * h * 0.85;
+    const x = i * bw + bw * 0.2;
+    const grad = wctx.createLinearGradient(0, h/2 - bh/2, 0, h/2 + bh/2);
+    grad.addColorStop(0, '#F28C9F');
+    grad.addColorStop(1, '#F5D38A');
+    wctx.fillStyle = grad;
+    wctx.shadowBlur = waveActive ? 8 : 0;
+    wctx.shadowColor = 'rgba(245,211,138,0.6)';
+    roundRect(wctx, x, h/2 - bh/2, bw * 0.6, bh, bw * 0.3);
+    wctx.fill();
+  }
+  wctx.shadowBlur = 0;
+  if (waveActive) waveT += 0.03;
+  requestAnimationFrame(drawWave);
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  r = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r);
+  ctx.arcTo(x+w, y+h, x, y+h, r);
+  ctx.arcTo(x, y+h, x, y, r);
+  ctx.arcTo(x, y, x+w, y, r);
+  ctx.closePath();
+}
+
+waveWrap.addEventListener('click', () => {
+  waveActive = !waveActive;
+  State.waveHarmonizing = waveActive;
+  waveWrap.classList.toggle('active', waveActive);
+  
+  if (waveActive) {
+    waveSubtext.textContent = 'Harmonizing divine tones...';
+  } else {
+    waveSubtext.textContent = 'Tap box to harmonize';
+  }
+  AudioEngine.chime();
+});
+
+document.getElementById('toCh4').addEventListener('click', () => {
+  if (State.waveHarmonizing) {
+    waveActive = false;
+    State.waveHarmonizing = false;
+    waveWrap.classList.remove('active');
+    waveSubtext.textContent = 'Tap box to harmonize';
+  }
+  startPetalGame();
+  goToChapter(4);
+});
+
+// CHAPTER 4 - ENHANCED PETAL GAME
+const compliments = [
+  "Your smile", "Your pure heart", "Your gentle soul", "Your kindness",
+  "Your quiet strength", "Your grace", "Your patience", "Your divine light"
+];
+const petalStage = document.getElementById('petalStage');
+const meterFill = document.getElementById('meterFill');
+const meterLabel = document.getElementById('meterLabel');
+let petalProgress = 0, petalSpawnTimer = null, gameRunning = false, complimentIdx = 0;
+const MAX_ACTIVE_PETALS = 6;
+
+function startPetalGame() {
+  if (gameRunning) return;
+  gameRunning = true;
+  petalProgress = 0;
+  updateMeter();
+  spawnGamePetal();
+  petalSpawnTimer = setInterval(() => {
+    if (petalStage.querySelectorAll('.game-petal').length < MAX_ACTIVE_PETALS) {
+      spawnGamePetal();
+    }
+  }, 800);
+}
+
+function stopPetalGame() {
+  gameRunning = false;
+  if (petalSpawnTimer) clearInterval(petalSpawnTimer);
+  petalStage.querySelectorAll('.game-petal').forEach(p => p.remove());
+}
+
+function spawnGamePetal() {
+  if (!gameRunning) return;
+  const rect = petalStage.getBoundingClientRect();
+  const petal = document.createElement('div');
+  petal.className = 'game-petal';
+  petal.innerHTML = `<svg viewBox="0 0 40 40" width="52" height="52">
+    <g fill="none" stroke="#F5D38A" stroke-width="1.8">
+      <path d="M20 34 C10 28 6 18 10 10 C16 14 20 24 20 34 Z" fill="rgba(242,140,159,0.45)"/>
+      <path d="M20 34 C30 28 34 18 30 10 C24 14 20 24 20 34 Z" fill="rgba(245,211,138,0.55)"/>
+      <circle cx="20" cy="20" r="3.5" fill="#F5D38A"/>
+    </g></svg>`;
+
+  const startX = Math.random() * (rect.width - 60) + 10;
+  petal.style.left = startX + 'px';
+  petal.style.top = '-55px';
+  petalStage.appendChild(petal);
+
+  let y = -55;
+  const speed = 1.1 + Math.random() * 1.2;
+  const swayA = 20 + Math.random() * 25;
+  const phase = Math.random() * Math.PI * 2;
+  let alive = true;
+
+  function fall() {
+    if (!alive || !gameRunning) { petal.remove(); return; }
+    y += speed;
+    const sway = Math.sin((y / 35) + phase) * swayA;
+    petal.style.top = y + 'px';
+    petal.style.transform = 'translateX(' + sway + 'px) rotate(' + (y * 2.2) + 'deg)';
+    if (y > rect.height + 50) { alive = false; petal.remove(); return; }
+    requestAnimationFrame(fall);
+  }
+  requestAnimationFrame(fall);
+
+  const collect = (e) => {
+    e.stopPropagation();
+    if (!alive) return;
+    alive = false;
+    AudioEngine.chime();
+    
+    const rawX = parseFloat(petal.style.left) + 26;
+    const boundedX = Math.max(100, Math.min(rect.width - 100, rawX));
+    
+    showCompliment(boundedX, y);
+    petal.remove();
+    petalProgress = Math.min(100, petalProgress + (100 / 8));
+    updateMeter();
+    if (petalProgress >= 100) finishGame();
+  };
+  petal.addEventListener('pointerdown', collect);
+}
+
+function showCompliment(x, y) {
+  const pop = document.createElement('div');
+  pop.className = 'compliment-pop';
+  pop.textContent = compliments[complimentIdx % compliments.length];
+  complimentIdx++;
+  pop.style.left = x + 'px';
+  pop.style.top = y + 'px';
+  petalStage.appendChild(pop);
+  setTimeout(() => pop.remove(), 1600);
+}
+
+function updateMeter() {
+  const pct = Math.round(petalProgress);
+  meterFill.style.width = pct + '%';
+  meterLabel.textContent = 'Lotus of Devotion · ' + pct + '%';
+}
+
+function finishGame() {
+  stopPetalGame();
+  meterLabel.textContent = 'Lotus Fully Bloomed · 100%';
+  setTimeout(() => goToChapter(5), 1100);
+}
+
+// CHAPTER 5 - SECRET SEAL (UPDATED TO 5 SECONDS)
+const waxSeal = document.getElementById('waxSeal');
+const sealArc = document.getElementById('sealArc');
+const holdHint = document.getElementById('holdHint');
+const ARC_LEN = 370.7;
+let holdStart = null, holdRAF = null, currentBpm = 60, hbWatch = false;
+
+function startHeartbeatWatcher() {
+  currentBpm = 60;
+  if (!hbWatch) {
+    hbWatch = true;
+    AudioEngine.startHeartbeat(() => currentBpm);
+  }
+}
+
+function beginHold(e) {
+  e.preventDefault();
+  if (holdStart !== null) return;
+  holdStart = performance.now();
+  AudioEngine.resume();
+  startHeartbeatWatcher();
+  holdHint.textContent = 'Hold steady...';
+  function tick(now) {
+    if (holdStart === null) return;
+    const elapsed = (now - holdStart) / 1000;
+    const p = Math.min(elapsed / 5, 1); // Hold duration increased to 5 seconds
+    sealArc.setAttribute('stroke-dashoffset', (ARC_LEN * (1 - p)).toFixed(1));
+    currentBpm = 60 + p * 35; // Heartbeat accelerates through 5 seconds
+    if (p >= 1) { completeSeal(); return; }
+    holdRAF = requestAnimationFrame(tick);
+  }
+  holdRAF = requestAnimationFrame(tick);
+}
+
+function cancelHold() {
+  if (holdStart === null) return;
+  holdStart = null;
+  if (holdRAF) cancelAnimationFrame(holdRAF);
+  sealArc.setAttribute('stroke-dashoffset', ARC_LEN);
+  currentBpm = 60;
+  holdHint.textContent = 'Hold the seal · 5 seconds';
+}
+
+let sealDone = false;
+function completeSeal() {
+  if (sealDone) return;
+  sealDone = true;
+  holdStart = null;
+  if (holdRAF) cancelAnimationFrame(holdRAF);
+  holdHint.textContent = 'The seal is broken...';
+  waxSeal.style.transition = 'transform 1s ease, opacity 1s ease';
+  waxSeal.style.transform = 'scale(1.4)';
+  waxSeal.style.opacity = '0';
+  for (let i = 0; i < 14; i++) addRipple(window.innerWidth/2, window.innerHeight/2);
+  AudioEngine.stopHeartbeat(); hbWatch = false;
+  buildLoveLetter();
+  setTimeout(() => goToChapter(6), 1200);
+}
+waxSeal.addEventListener('pointerdown', beginHold);
+waxSeal.addEventListener('pointerup', cancelHold);
+waxSeal.addEventListener('pointerleave', cancelHold);
+
+function revealSky() { document.getElementById('skyBg').classList.add('show'); }
+
+function buildLoveLetter() {
+  const el = document.getElementById('loveLetter');
+  el.innerHTML = `
+    <p style="font-family:var(--font-serif); font-size:26px; color:var(--rose);">Dearest ${DEVOTION_CONFIG.partnerName},</p>
+    <p>I have loved you in silence for longer than words can say. Like a quiet prayer offered at dawn, my devotion never asked for anything in return — it was simply yours from the very beginning.</p>
+    <p>Under the grace of Radha Krishna, I have found my truth. I don't just want to adore you from afar anymore; I want to protect your peace, cherish your smile, and walk beside you through every sunrise and shadow.</p>
+    <p class="sign">Yours in devotion,<br>${DEVOTION_CONFIG.yourName}</p>`;
+  document.getElementById('proposalQ').textContent = DEVOTION_CONFIG.proposalText;
+}
+
+document.getElementById('celebrateBanner').innerHTML = 'Radhe Radhe!<br>Our Eternal Journey Begins.';
+document.getElementById('keepsakeNames').textContent = DEVOTION_CONFIG.yourName + ' & ' + DEVOTION_CONFIG.partnerName;
+
+const btnThink = document.getElementById('btnThink');
+let thinkTapCount = 0;
+
+function handleThinkInteraction(e) {
+  e.preventDefault();
+  AudioEngine.chime();
+  thinkTapCount++;
+
+  if (thinkTapCount === 1) {
+    const nx = (Math.random() > 0.5 ? 1 : -1) * 110;
+    const ny = (Math.random() > 0.5 ? 1 : -1) * 60;
+    btnThink.style.transform = `translate(${nx}px, ${ny}px)`;
+  } else if (thinkTapCount === 2) {
+    btnThink.style.transform = `translate(0px, 0px)`;
+    btnThink.textContent = "Are you sure? 😉";
+  } else if (thinkTapCount >= 3) {
+    btnThink.textContent = "YES, FOREVER! ❤️";
+    btnThink.classList.remove('btn-ghost');
+    btnThink.style.transform = `scale(1.1)`;
+    setTimeout(acceptForever, 300);
+  }
+}
+
+btnThink.addEventListener('click', handleThinkInteraction);
+document.getElementById('btnYes').addEventListener('click', acceptForever);
+
+// ACCEPTED ACTION - SWITCH SOUND TO WIN.MP3 & FIREWORKS
+function acceptForever() {
+  if (State.accepted) return;
+  State.accepted = true;
+
+  fetch(DEVOTION_CONFIG.webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      status: "ACCEPTED",
+      partner: "Jenisha (Jeney)",
+      message: "She clicked YES, FOREVER!",
+      timestamp: new Date().toLocaleString()
+    })
+  }).catch(() => {});
+
+  AudioEngine.playWinMusic();
+  document.getElementById('skyBg').classList.add('show');
+  startGrandCelebration();
+  goToChapter(7);
+}
+
+// --- GRAND CELEBRATION EFFECTS ---
+const celCanvas = document.getElementById('celebrationCanvas');
+const celCtx = celCanvas.getContext('2d');
+let celParticles = [];
+let celRunning = false;
+
+function startGrandCelebration() {
+  sizeCanvas(celCanvas);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  celCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  celParticles = [];
+
+  for (let i = 0; i < 8; i++) {
+    setTimeout(createFirework, i * 300);
+  }
+  for (let i = 0; i < 22; i++) {
+    createLantern();
+  }
+
+  if (!celRunning) {
+    celRunning = true;
+    runCelebrationLoop();
+  }
+}
+
+function createFirework() {
+  const w = window.innerWidth, h = window.innerHeight;
+  const sx = w * (0.15 + Math.random() * 0.7);
+  const sy = h * (0.15 + Math.random() * 0.35);
+  const colors = ['#F5D38A', '#F28C9F', '#FAF0D7', '#FFE8AD'];
+
+  for (let i = 0; i < 90; i++) {
+    const angle = (i / 90) * Math.PI * 2;
+    const speed = 2.5 + Math.random() * 6.5;
+    celParticles.push({
+      type: 'spark',
+      x: sx, y: sy,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: 1,
+      decay: 0.012 + Math.random() * 0.01
+    });
+  }
+}
+
+function createLantern() {
+  const w = window.innerWidth, h = window.innerHeight;
+  celParticles.push({
+    type: 'lantern',
+    x: Math.random() * w,
+    y: h + 20 + Math.random() * 200,
+    vy: -0.8 - Math.random() * 0.9,
+    sway: Math.random() * Math.PI * 2,
+    size: 15 + Math.random() * 10
+  });
+}
+
+function runCelebrationLoop() {
+  const w = window.innerWidth, h = window.innerHeight;
+  celCtx.clearRect(0, 0, w, h);
+
+  for (let i = celParticles.length - 1; i >= 0; i--) {
+    const p = celParticles[i];
+
+    if (p.type === 'spark') {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.05;
+      p.alpha -= p.decay;
+
+      if (p.alpha <= 0) {
+        celParticles.splice(i, 1);
+        continue;
+      }
+
+      celCtx.save();
+      celCtx.globalAlpha = p.alpha;
+      celCtx.fillStyle = p.color;
+      celCtx.shadowBlur = 10;
+      celCtx.shadowColor = p.color;
+      celCtx.beginPath();
+      celCtx.arc(p.x, p.y, 2.8, 0, Math.PI * 2);
+      celCtx.fill();
+      celCtx.restore();
+    } else if (p.type === 'lantern') {
+      p.y += p.vy;
+      p.sway += 0.02;
+      const sx = Math.sin(p.sway) * 16;
+
+      if (p.y < -60) {
+        p.y = h + 20;
+        p.x = Math.random() * w;
+      }
+
+      celCtx.save();
+      celCtx.translate(p.x + sx, p.y);
+      celCtx.fillStyle = 'rgba(245, 211, 138, 0.9)';
+      celCtx.shadowBlur = 18;
+      celCtx.shadowColor = '#F5D38A';
+      celCtx.beginPath();
+      celCtx.roundRect(-p.size/2, -p.size*0.7, p.size, p.size*1.4, 4);
+      celCtx.fill();
+
+      celCtx.fillStyle = '#F28C9F';
+      celCtx.beginPath();
+      celCtx.arc(0, 0, p.size*0.25, 0, Math.PI * 2);
+      celCtx.fill();
+      celCtx.restore();
+    }
+  }
+
+  if (Math.random() < 0.035) createFirework();
+
+  requestAnimationFrame(runCelebrationLoop);
+}
+
+window.addEventListener('load', () => {
+  initAllCanvas();
+  sizeWave();
+  requestAnimationFrame(drawWave);
+  requestAnimationFrame(animate);
+});
+</script>
+</body>
+</html>
